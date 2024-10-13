@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../empty/EmptyBlock.hpp"
 
 #include "SFML/Graphics/Drawable.hpp"
 #include "SFML/Graphics/Sprite.hpp"
@@ -13,7 +14,7 @@ namespace blocks
 {
     namespace inputs
     {
-        class CameraInput: public sf::Drawable {
+        class CameraInput: public blocks::empty::EmptyBlock {
         public:
 
             CameraInput(const int cameraIndex);

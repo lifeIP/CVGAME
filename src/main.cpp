@@ -10,7 +10,10 @@ int main()
     // sf::RectangleShape rect(sf::Vector2f(50.f, 50.f));
     // rect.setFillColor(sf::Color::Green);
 
-    blocks::inputs::CameraInput cam_0(0);    
+    blocks::inputs::CameraInput cam_0(0);
+    cam_0.setPosition(sf::Vector2f(50.0, 50.0));
+    cam_0.setSize(sf::Vector2f(200.0, 200.0));
+    cam_0.setFillColor(sf::Color(50, 50, 50));
 
     while (window.isOpen())
     {

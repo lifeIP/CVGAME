@@ -47,6 +47,7 @@ namespace blocks
         void CameraInput::draw(sf::RenderTarget &target, sf::RenderStates states) const
         {
             target.draw(mSprite, states);
+            target.draw(mRect, states);
         }
     }
 }
