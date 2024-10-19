@@ -11,9 +11,11 @@ int main()
     // rect.setFillColor(sf::Color::Green);
 
     blocks::inputs::CameraInput cam_0(0);
-    cam_0.setPosition(sf::Vector2f(50.0, 50.0));
-    cam_0.setSize(sf::Vector2f(200.0, 200.0));
+    cam_0.setPosition(sf::Vector2f(100.0, 50.0));
+    cam_0.setSize(sf::Vector2f(150.0, 150.0));
     cam_0.setFillColor(sf::Color(50, 50, 50));
+
+    
 
     while (window.isOpen())
     {
@@ -27,13 +29,15 @@ int main()
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
                     window.close();
                 }
-            }
-            
+            }    
+            cam_0.eventDragBlock(window, event);        
         }
 
         window.clear();
 
+        
         cam_0.updateFrame();
+        
         window.draw(cam_0);
         window.display();
     }
