@@ -25,7 +25,7 @@ int main()
                     window.close();
                 }
             }
-            emptyBlock->eventDragBlock(window, event);  
+            emptyBlock->events(window, event);  
         }
 
         window.clear(sf::Color(0, 0, 0));

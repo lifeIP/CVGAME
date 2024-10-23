@@ -23,6 +23,11 @@ namespace blocks
             mAddButton->draw(window);
         }
 
+
+
+
+
+
         EmptyBlock::EmptyBlock(const sf::Vector2f &position, const sf::Vector2f &size) 
         {
 
@@ -51,7 +56,7 @@ namespace blocks
             mAddButton->move(steps);
         }
 
-        bool EmptyBlock::eventDragBlock(const sf::Window &relativeTo, const sf::Event &event)
+        bool EmptyBlock::events(const sf::Window &relativeTo, const sf::Event &event)
         {
             if (event.type == sf::Event::EventType::MouseButtonPressed){
                 if(event.mouseButton.button == sf::Mouse::Left && !isSelected){
@@ -70,7 +75,7 @@ namespace blocks
             else if (event.type == sf::Event::EventType::MouseMoved){
                 
                 auto mm = event.mouseMove;
-                
+            
                 if(isSelected)
                 {
                     sf::Vector2f diff = sf::Vector2f(
@@ -82,6 +87,8 @@ namespace blocks
                     move(sf::Vector2f(- diff.x, - diff.y));
                 }
             }
+            mAddButton->events(relativeTo, event);
+
             return isSelected;
         }
     }

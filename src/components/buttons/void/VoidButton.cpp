@@ -26,41 +26,53 @@ namespace components
             return mIsReleased;
         }
 
-        VoidButton::VoidButton(/* args */)
+
+
+        void VoidButton::setColorPushed(const sf::Color color)
         {
-            mPosition = new sf::Vector2f(0.0, 0.0);
-            mSize = new sf::Vector2f(0.0, 0.0);
-            mIsPressed = false;
-            mIsReleased = false;
-            mIsActive = false;
+            this->mColorPushed = color;
         }
 
-        VoidButton::VoidButton(const sf::Vector2f &position, const sf::Vector2f &size)
+        sf::Color VoidButton::getColorPushed() const
         {
-            mPosition = new sf::Vector2f(position);
-            mSize = new sf::Vector2f(size);
+            return this->mColorPushed;
+        }
+
+
+        void VoidButton::setColorDefault(const sf::Color color)
+        {
+            this->mColorDefault = color;
+        }
+
+        sf::Color VoidButton::getColorDefault() const
+        {
+            return this->mColorDefault;
+        }
+
+
+        void VoidButton::setColorFocused(const sf::Color color)
+        {
+            this->mColorFocused = color;
+        }
+
+        sf::Color VoidButton::getColorFocused() const
+        {
+            return this->mColorFocused;
+        }
+
+
+        
+
+        VoidButton::VoidButton()
+        {
             mIsPressed = false;
             mIsReleased = false;
             mIsActive = true;
         }
 
-        void VoidButton::setPosition(const sf::Vector2f &position)
-        {
-            *mPosition = position;   
-        }
-        void VoidButton::setSize(const sf::Vector2f &size)
-        {
-            *mSize = size;
-        }
-
-        void VoidButton::getButtonStatus(sf::RenderWindow& window, sf::Event& event){
-
-        }
-
         VoidButton::~VoidButton()
         {
-            delete mPosition;
-            delete mSize;
+
         }
     }
 }

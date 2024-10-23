@@ -27,7 +27,7 @@ namespace components
             
             virtual void move(const sf::Vector2f &steps);
             virtual void draw(sf::RenderWindow& window);
-            virtual void getButtonStatus(sf::RenderWindow& window, sf::Event& event);
+            virtual void events(const sf::Window& window, const sf::Event& event);
         };
     }
 }
