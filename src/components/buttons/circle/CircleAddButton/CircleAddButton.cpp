@@ -19,12 +19,12 @@ namespace components
             mHorizontalRectangleShape->move(steps);
         }
 
-        CircleAddButton::CircleAddButton(const sf::Vector2f &position, const float size, const std::size_t &pointCount) : VoidButton()
+        CircleAddButton::CircleAddButton(const sf::Vector2f &position, const float size, const std::size_t &pointCount) : CircleButton(position, size, pointCount)
         {
             mCircleShape = new sf::CircleShape(size / 2, pointCount);
             mCircleShape->setPointCount(pointCount);
             mCircleShape->setPosition(position);
-            mCircleShape->setFillColor(sf::Color(217, 217, 217));
+            mCircleShape->setFillColor(mColorDefault);
 
             sf::Vector2f center(position.x + size / 2, position.y + size / 2);
 

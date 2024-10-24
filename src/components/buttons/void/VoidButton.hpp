@@ -20,6 +20,8 @@ namespace components
             sf::Color mColorPushed;
             sf::Color mColorDefault;
             sf::Color mColorFocused;
+            sf::Vector2f mPosition;
+            sf::Vector2f mSize;
             
         public:
 
@@ -46,28 +48,24 @@ namespace components
 
 
             /// @brief Устанавливает цвет которым красится кнопка при нажатии.
-            void setColorPushed(const sf::Color color);
-
+            virtual void setColorPushed(const sf::Color &color);
             /// @brief Возвращает цвет которым красится кнопка при нажатии.
-            sf::Color getColorPushed() const;
+            virtual sf::Color getColorPushed() const;
 
 
 
             /// @brief Устанавливает цвет которым красится кнопка в состоянии покоя.
-            void setColorDefault(const sf::Color color);
-
+            virtual void setColorDefault(const sf::Color &color);
             /// @brief Возвращает цвет которым красится кнопка в состоянии покоя.
-            sf::Color getColorDefault() const;
+            virtual sf::Color getColorDefault() const;
 
 
 
             /// @brief Устанавливает цвет которым красится кнопка когда пользователь направляет на неё курсором мыши.
-            void setColorFocused(const sf::Color color);
-
+            virtual void setColorFocused(const sf::Color &color);
             /// @brief Возвращает значение цвета которым красится кнопка когда пользователь направляет на неё курсором мыши.
-            sf::Color getColorFocused() const;
+            virtual sf::Color getColorFocused() const;
 
-            
 
             /// @brief Функция для перемещения кнопки
             /// @param steps Шаг перемещения
@@ -76,10 +74,14 @@ namespace components
 
             /// @brief Задает позицию кнопки
             virtual void setPosition(const sf::Vector2f &position) = 0;
+            /// @brief Возвращает позицию кнопки
+            virtual sf::Vector2f getPosition() const = 0;
 
 
             /// @brief Задает размер кнопки
             virtual void setSize(const sf::Vector2f &size) = 0;
+            /// @brief Возвращает размер кнопки
+            virtual sf::Vector2f getSize() const  = 0;
 
 
             /// @brief Функция для обработки нажатия и отпускания кнопки.

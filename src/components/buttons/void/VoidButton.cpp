@@ -28,7 +28,7 @@ namespace components
 
 
 
-        void VoidButton::setColorPushed(const sf::Color color)
+        void VoidButton::setColorPushed(const sf::Color &color)
         {
             this->mColorPushed = color;
         }
@@ -39,7 +39,7 @@ namespace components
         }
 
 
-        void VoidButton::setColorDefault(const sf::Color color)
+        void VoidButton::setColorDefault(const sf::Color &color)
         {
             this->mColorDefault = color;
         }
@@ -50,7 +50,7 @@ namespace components
         }
 
 
-        void VoidButton::setColorFocused(const sf::Color color)
+        void VoidButton::setColorFocused(const sf::Color &color)
         {
             this->mColorFocused = color;
         }
