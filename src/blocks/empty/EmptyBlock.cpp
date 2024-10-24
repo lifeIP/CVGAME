@@ -1,5 +1,8 @@
 #include "EmptyBlock.hpp"
-#include "../../components/buttons/circle/CircleAddButton.hpp"
+
+#include "../../components/buttons/void/VoidButton.hpp"
+#include "../../components/buttons/circle/CircleButton.hpp"
+#include "../../components/buttons/circle/CircleAddButton/CircleAddButton.hpp"
 
 #include "SFML/Graphics/Drawable.hpp"
 #include "SFML/Graphics/Sprite.hpp"
@@ -24,10 +27,6 @@ namespace blocks
         }
 
 
-
-
-
-
         EmptyBlock::EmptyBlock(const sf::Vector2f &position, const sf::Vector2f &size) 
         {
 
@@ -44,6 +43,10 @@ namespace blocks
             mBody->setFillColor(sf::Color(29, 21, 21));
 
             mAddButton = new components::buttons::CircleAddButton(sf::Vector2f(position.x + (size.x)/2 - 40.f, position.y + (size.y - mHeaderSize)/2 - 20), 80.f, 100);
+            mAddButton->setColorPushed(sf::Color(0, 255, 0));
+            mAddButton->setColorFocused(sf::Color(255, 0, 0));
+            mAddButton->setColorDefault(sf::Color(217, 217, 217));
+
         }
 
         EmptyBlock::~EmptyBlock()
@@ -88,6 +91,7 @@ namespace blocks
                 }
             }
             mAddButton->events(relativeTo, event);
+            mAddButton->handler();
 
             return isSelected;
         }

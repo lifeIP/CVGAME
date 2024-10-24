@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../components/buttons/circle/CircleAddButton.hpp"
+#include "../../components/buttons/circle/CircleAddButton/CircleAddButton.hpp"
 #include "SFML/Graphics/Drawable.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Image.hpp"

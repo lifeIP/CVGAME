@@ -13,7 +13,7 @@ namespace components
 {
     namespace buttons
     {
-        class CircleButton: VoidButton
+        class CircleButton: public VoidButton
         {
         protected:
             sf::CircleShape *mCircleShape;

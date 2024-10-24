@@ -11,6 +11,7 @@ int main()
     // sf::RectangleShape rect(sf::Vector2f(50.f, 50.f));
     // rect.setFillColor(sf::Color::Green);
     blocks::empty::EmptyBlock *emptyBlock = new blocks::empty::EmptyBlock(sf::Vector2f(0.f, 0.f), sf::Vector2f(400.f, 300.f));
+    
 
     while (window.isOpen())
     {

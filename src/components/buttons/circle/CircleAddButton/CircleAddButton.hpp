@@ -13,7 +13,7 @@ namespace components
 {
     namespace buttons
     {
-        class CircleAddButton: CircleButton
+        class CircleAddButton: public CircleButton
         {
         private:
             sf::RectangleShape *mVerticalRectangleShape;
@@ -40,14 +40,10 @@ namespace components
 
             /// @brief Задает позицию кнопки
             virtual void setPosition(const sf::Vector2f &position) override;
-            /// @brief Возвращает позицию кнопки
-            virtual sf::Vector2f getPosition() const = 0;
 
 
             /// @brief Задает размер кнопки
             virtual void setSize(const sf::Vector2f &size) override;
-            /// @brief Возвращает размер кнопки
-            virtual void getSize(const sf::Vector2f &size) const override;
 
 
             /// @brief Функция для обработки нажатия и отпускания кнопки.

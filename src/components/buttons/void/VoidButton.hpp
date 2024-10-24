@@ -48,23 +48,23 @@ namespace components
 
 
             /// @brief Устанавливает цвет которым красится кнопка при нажатии.
-            virtual void setColorPushed(const sf::Color &color);
+            void setColorPushed(const sf::Color &color);
             /// @brief Возвращает цвет которым красится кнопка при нажатии.
-            virtual sf::Color getColorPushed() const;
+            sf::Color getColorPushed() const;
 
 
 
             /// @brief Устанавливает цвет которым красится кнопка в состоянии покоя.
-            virtual void setColorDefault(const sf::Color &color);
+            void setColorDefault(const sf::Color &color);
             /// @brief Возвращает цвет которым красится кнопка в состоянии покоя.
-            virtual sf::Color getColorDefault() const;
+            sf::Color getColorDefault() const;
 
 
 
             /// @brief Устанавливает цвет которым красится кнопка когда пользователь направляет на неё курсором мыши.
-            virtual void setColorFocused(const sf::Color &color);
+            void setColorFocused(const sf::Color &color);
             /// @brief Возвращает значение цвета которым красится кнопка когда пользователь направляет на неё курсором мыши.
-            virtual sf::Color getColorFocused() const;
+            sf::Color getColorFocused() const;
 
 
             /// @brief Функция для перемещения кнопки
