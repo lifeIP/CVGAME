@@ -73,15 +73,15 @@ namespace components
 
 
             /// @brief Задает позицию кнопки
-            virtual void setPosition(const sf::Vector2f &position) = 0;
+            virtual void setPosition(const sf::Vector2f &position);
             /// @brief Возвращает позицию кнопки
-            virtual sf::Vector2f getPosition() const = 0;
+            virtual sf::Vector2f getPosition() const;
 
 
             /// @brief Задает размер кнопки
-            virtual void setSize(const sf::Vector2f &size) = 0;
+            virtual void setSize(const sf::Vector2f &size);
             /// @brief Возвращает размер кнопки
-            virtual sf::Vector2f getSize() const  = 0;
+            virtual sf::Vector2f getSize() const;
 
 
             /// @brief Функция для обработки нажатия и отпускания кнопки.

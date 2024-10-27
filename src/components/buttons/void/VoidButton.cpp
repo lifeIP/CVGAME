@@ -27,6 +27,25 @@ namespace components
         }
 
 
+        void VoidButton::setPosition(const sf::Vector2f &position)
+        {
+            mPosition = position;
+        }
+
+        sf::Vector2f VoidButton::getPosition() const
+        {
+            return mPosition;
+        }
+
+        void VoidButton::setSize(const sf::Vector2f &size)
+        {
+            mSize = size;
+        }
+
+        sf::Vector2f VoidButton::getSize() const
+        {
+            return mPosition;
+        }
 
         void VoidButton::setColorPushed(const sf::Color &color)
         {

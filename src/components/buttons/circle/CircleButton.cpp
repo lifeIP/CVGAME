@@ -28,6 +28,8 @@ namespace components
         void CircleButton::move(const sf::Vector2f &steps)
         {
             mCircleShape->move(steps);
+            
+            VoidButton::setPosition(mCircleShape->getPosition());
         }
 
         void CircleButton::setPosition(const sf::Vector2f &position)
