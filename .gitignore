@@ -1,3 +1,6 @@
 *.o
 *.png
 /.vscode
+.o
+sfml-app
+/build

@@ -7,7 +7,7 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics.hpp"
 
-
+#include <iostream>
 
 namespace components
 {
@@ -91,7 +91,7 @@ namespace components
 
         VoidButton::~VoidButton()
         {
-
+            std::cout << "~VoidButton" << std::endl;
         }
     }
 }

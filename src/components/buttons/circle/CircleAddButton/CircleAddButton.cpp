@@ -7,6 +7,7 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics.hpp"
 
+#include <iostream>
 namespace components
 {
     namespace buttons
@@ -67,7 +68,8 @@ namespace components
         {
             delete mVerticalRectangleShape;
             delete mHorizontalRectangleShape;
-            CircleButton::~CircleButton();
+            std::cout << "~CircleAddButton" << std::endl;
+            // CircleButton::~CircleButton();
         }
 
         int CircleAddButton::handler()

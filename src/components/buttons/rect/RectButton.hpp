@@ -18,9 +18,7 @@ namespace components
         protected:
             sf::RectangleShape *mBody;
             sf::Text *mText;
-            sf::Color mTextColor;
-            sf::Color mBorderColor;
-
+            sf::Font *mFont;
 
         public:
             RectButton(const sf::Vector2f &position, const sf::Vector2f &size);
@@ -30,6 +28,48 @@ namespace components
             /// @param steps Шаг перемещения
             virtual void move(const sf::Vector2f &steps) override;
 
+
+
+            /// @brief Функция для установки шрифта
+            void setFont(const sf::String& string);
+            /// @brief Функция для получения установленного шрифта 
+            sf::Font getFont() const;
+
+
+
+            /// @brief Функция для установки текста отображаемого на кнопке
+            void setString(const sf::String& string);
+            /// @brief Функция для получения текста отображаемого на кнопке
+            sf::String getString() const;
+
+
+
+            /// @brief Функция для установки размера букв отображаемого текста  
+            void setCharacterSize(unsigned int size);
+            /// @brief Функция для получения размера букв отображаемого текста
+            unsigned int getCharacterSize() const;
+
+
+
+            /// @brief Функция для установки цвета отображаемого текста
+            void setTextColor(const sf::Color &color);
+            /// @brief Функция для получения цвета отображаемого текста
+            sf::Color getTextColor() const;
+
+
+
+            /// @brief Функция для установки цвета оконтовки кнопки
+            void setBorderColor(const sf::Color &color);
+            /// @brief Функция для получения цвета оконтовки кнопки
+            sf::Color getBorderColor() const;
+
+
+
+            /// @brief Функция для установки толщины оконтовки кнопки
+            void setOutlineThickness(const float &thickness);
+            /// @brief Функция для получения толщины оконтовки кнопки 
+            float getOutlineThickness() const;
+    
 
             /// @brief Задает позицию кнопки
             virtual void setPosition(const sf::Vector2f &position) override;

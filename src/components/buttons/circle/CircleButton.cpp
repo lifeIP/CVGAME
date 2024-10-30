@@ -8,6 +8,8 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics.hpp"
 
+#include <iostream>
+
 namespace components
 {
     namespace buttons
@@ -23,6 +25,7 @@ namespace components
         CircleButton::~CircleButton()
         {
             delete mCircleShape;
+            std::cout << "~CircleButton" << std::endl;
         }
 
         void CircleButton::move(const sf::Vector2f &steps)

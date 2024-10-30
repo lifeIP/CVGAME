@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../../components/buttons/circle/CircleAddButton/CircleAddButton.hpp"
+#include "../../components/buttons/rect/RectButton.hpp"
+
 #include "SFML/Graphics/Drawable.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Image.hpp"
@@ -18,7 +20,10 @@ namespace blocks
             EmptyBlock(const sf::Vector2f &position, const sf::Vector2f &size);
             virtual ~EmptyBlock();
 
-            bool events(const sf::Window &relativeTo, const sf::Event &event);
+
+            
+
+            int events(const sf::Window &relativeTo, const sf::Event &event);
             virtual void move(const sf::Vector2f &steps);
             virtual void draw(sf::RenderWindow& window);
 
@@ -27,6 +32,7 @@ namespace blocks
             float mHeaderSize;
             sf::Vector2i *oldPos;
             components::buttons::CircleAddButton *mAddButton;
+            components::buttons::RectButton *mExitButton;
         protected:
             sf::RectangleShape *mHeader;
             sf::RectangleShape *mBody;
