@@ -1,6 +1,7 @@
 #include "SFML/Graphics.hpp"
 
 #include "components/buttons/rect/RectButton.hpp"
+#include "components/buttons/circle/CircleIconButton/CircleIconButton.hpp"
 #include "blocks/empty/EmptyBlock.hpp"
 
 #include <memory>
@@ -17,7 +18,7 @@ int main()
     // rect.setFillColor(sf::Color::Green);
     
     std::unique_ptr<blocks::empty::EmptyBlock> eb(new blocks::empty::EmptyBlock(sf::Vector2f(150.f, 150.f), sf::Vector2f(400.f, 300.f)));
-    
+    // components::buttons::CircleIconButton *button = new components::buttons::CircleIconButton(sf::Vector2f(50, 50), std::string("./src/textures/free-icon-settings.png"), 150., 150);
     
 
     while (window.isOpen())
@@ -33,7 +34,9 @@ int main()
                     window.close();
                 }
             }
-            
+            // button->events(window, event);
+            // std::cout << "events id: " << button->handler() << std::endl;
+
             if(bool(eb)){
                 if(eb.get()->events(window, event) != 0)
                 {
@@ -51,7 +54,7 @@ int main()
             eb.get()->draw(window);
             std::cout << "eb2" << std::endl;
         }
-
+        // button->draw(window);
         window.display();
     }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../components/buttons/circle/CircleAddButton/CircleAddButton.hpp"
+#include "../../components/buttons/circle/CircleIconButton/CircleIconButton.hpp"
 #include "../../components/buttons/rect/RectButton.hpp"
 
 #include "SFML/Graphics/Drawable.hpp"
@@ -21,9 +21,8 @@ namespace blocks
             virtual ~EmptyBlock();
 
 
-            
 
-            int events(const sf::Window &relativeTo, const sf::Event &event);
+            virtual int events(const sf::Window &relativeTo, const sf::Event &event);
             virtual void move(const sf::Vector2f &steps);
             virtual void draw(sf::RenderWindow& window);
 
@@ -31,12 +30,11 @@ namespace blocks
             bool isSelected;
             float mHeaderSize;
             sf::Vector2i *oldPos;
-            components::buttons::CircleAddButton *mAddButton;
+            components::buttons::CircleIconButton *mIconButton;
             components::buttons::RectButton *mExitButton;
         protected:
             sf::RectangleShape *mHeader;
             sf::RectangleShape *mBody;
-            
         };
     }
 }

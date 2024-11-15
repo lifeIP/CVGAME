@@ -24,7 +24,7 @@ namespace blocks
         {
             window.draw(*mHeader);
             window.draw(*mBody);
-            mAddButton->draw(window);
+            mIconButton->draw(window);
             mExitButton->draw(window);
         }
 
@@ -34,7 +34,7 @@ namespace blocks
 
             oldPos = new sf::Vector2i(0, 0);
 
-            mHeaderSize = 40.f;
+            mHeaderSize = 48.f;
             
             mHeader = new sf::RectangleShape(sf::Vector2f(size.x, mHeaderSize));
             mHeader->setPosition(sf::Vector2f(position.x, position.y));
@@ -44,13 +44,10 @@ namespace blocks
             mBody->setPosition(sf::Vector2f(position.x, position.y + mHeaderSize));
             mBody->setFillColor(sf::Color(29, 21, 21));
 
-            mAddButton = new components::buttons::CircleAddButton(sf::Vector2f(position.x + (size.x)/2 - 40.f, position.y + (size.y - mHeaderSize)/2 - 20), 80.f, 100);
-            mAddButton->setColorPushed(sf::Color(0, 255, 0));
-            mAddButton->setColorFocused(sf::Color(255, 0, 0));
-            mAddButton->setColorDefault(sf::Color(217, 217, 217));
+
 
             mExitButton = new components::buttons::RectButton(
-                sf::Vector2f(position.x + size.x - 40, position.y + mHeaderSize - 39), 
+                sf::Vector2f(position.x + size.x - 44, position.y + mHeaderSize - 43), 
                 sf::Vector2f(39, 38));
 
             mExitButton->setColorPushed(sf::Color(255, 10, 10));
@@ -59,6 +56,16 @@ namespace blocks
             mExitButton->setTextColor(sf::Color(255, 255, 255));
             mExitButton->setString(sf::String("X"));
 
+
+            mIconButton = new components::buttons::CircleIconButton(
+                sf::Vector2f(position.x + 5, position.y + mHeaderSize - 43),
+                std::string("./src/textures/free-icon-settings.png"), 
+                35.f, 
+                150);
+
+            mIconButton->setColorPushed(sf::Color(215, 215, 215));
+            mIconButton->setColorFocused(sf::Color(255, 0, 0));
+            mIconButton->setColorDefault(sf::Color(0, 255, 0));
         }
 
         EmptyBlock::~EmptyBlock()
@@ -66,7 +73,7 @@ namespace blocks
             delete mHeader;
             delete mBody;
 
-            mAddButton->~CircleAddButton();
+            mIconButton->~CircleIconButton();
             // delete mAddButton;
             
             // mExitButton->~RectButton();
@@ -80,7 +87,7 @@ namespace blocks
         void EmptyBlock::move(const sf::Vector2f &steps){
             mHeader->move(steps);
             mBody->move(steps);
-            mAddButton->move(steps);
+            mIconButton->move(steps);
             mExitButton->move(steps);
         }
 
@@ -115,8 +122,8 @@ namespace blocks
                     move(sf::Vector2f(- diff.x, - diff.y));
                 }
             }
-            mAddButton->events(relativeTo, event);
-            mAddButton->handler();
+            mIconButton->events(relativeTo, event);
+            mIconButton->handler();
 
             mExitButton->events(relativeTo, event);
             
