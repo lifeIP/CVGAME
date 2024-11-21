@@ -133,5 +133,33 @@ namespace blocks
             }
             return 0;
         }
+
+        void EmptyBlock::setPosition(const sf::Vector2f &position){
+            mHeader->setPosition(sf::Vector2f(position.x, position.y));
+            mBody->setPosition(sf::Vector2f(position.x, position.y + mHeaderSize));
+            mExitButton->setPosition(sf::Vector2f(position.x + mBody->getSize().x - 44, position.y + mHeaderSize - 43));
+            mIconButton->setPosition(sf::Vector2f(position.x + 5, position.y + mHeaderSize - 43));
+        }
+
+        sf::Vector2f EmptyBlock::getPosition() const{
+            return mHeader->getPosition();
+        }
+
+        void EmptyBlock::setSize(const sf::Vector2f &size){
+            mHeader->setSize(sf::Vector2f(size.x, mHeaderSize));
+            mBody->setSize(sf::Vector2f(size.x, size.y - mHeaderSize));
+        }
+
+        sf::Vector2f EmptyBlock::getSize() const{
+            return sf::Vector2f(mBody->getSize().x, mBody->getSize().y + mHeaderSize);
+        }
+
+        void EmptyBlock::setHeaderSize(const float &headerSize){
+            mHeaderSize = headerSize;
+        }
+        
+        float EmptyBlock::getHeaderSize() const{
+            return mHeaderSize;
+        }
     }
 }

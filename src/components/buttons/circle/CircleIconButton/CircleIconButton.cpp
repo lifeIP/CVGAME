@@ -22,34 +22,36 @@ namespace components
             const std::size_t &pointCount): 
         CircleButton(position, size, pointCount)
         {
-            image = new sf::Image();
-            texture = new sf::Texture();
-            sprite = new sf::Sprite();
+            mImage = new sf::Image();
+            mTexture = new sf::Texture();
+            mSprite = new sf::Sprite();
 
-            if(image->loadFromFile(imagePath))//загружаем в него файл
+            if(mImage->loadFromFile(imagePath))//загружаем в него файл
             {
-                std::cout << "ERROR image" << std::endl;
+                std::cout << "ERROR mImage" << std::endl;
             }   
 
             CircleIconButton::setColorDefault(sf::Color(255, 255, 255));
             
 
-            texture->loadFromImage(*image);
-            sf::Vector2u tsize = texture->getSize();
-            sf::Vector2f scale = sf::Vector2f(size / texture->getSize().x - 0.005, size / texture->getSize().y - 0.005);
+            mTexture->loadFromImage(*mImage);
+            sf::Vector2u tsize = mTexture->getSize();
+            sf::Vector2f scale = sf::Vector2f(size / mTexture->getSize().x - 0.005, size / mTexture->getSize().y - 0.005);
             
             // sprite->setTextureRect(sf::IntRect(sf::Vector2i(position.x, position.y), sf::Vector2i(size, size)));
-            sprite->setTexture(*texture);
-            sprite->setScale(scale);
+            mSprite->setTexture(*mTexture);
+            mSprite->setScale(scale);
             
             
-            // texture->getSize().x / 2
+            // mTexture->getSize().x / 2
             // sprite->setPosition();    
-            sprite->setPosition(sf::Vector2f(position.x + tsize.x * 0.0025, position.y + tsize.y * 0.0025));
+            mSprite->setPosition(sf::Vector2f(position.x + tsize.x * 0.0025, position.y + tsize.y * 0.0025));
         }
 
         CircleIconButton::~CircleIconButton(){
-
+            delete mSprite;
+            delete mTexture;
+            delete mImage;
         }
 
         void CircleIconButton::events(const sf::Window& window, const sf::Event& event) {
@@ -62,26 +64,26 @@ namespace components
 
         void CircleIconButton::move(const sf::Vector2f &steps){
             CircleButton::move(steps);
-            sprite->move(steps);
+            mSprite->move(steps);
         }
 
         void CircleIconButton::setSize(const sf::Vector2f &size){
             CircleButton::setSize(size);
-            sf::Vector2f scale = sf::Vector2f(size.x / texture->getSize().x, size.x / texture->getSize().y);
+            sf::Vector2f scale = sf::Vector2f(size.x / mTexture->getSize().x, size.x / mTexture->getSize().y);
             
-            sprite->setTexture(*texture);
-            sprite->setScale(scale);
+            mSprite->setTexture(*mTexture);
+            mSprite->setScale(scale);
         }
 
         void CircleIconButton::setPosition(const sf::Vector2f &position){
             CircleButton::setPosition(position);
-            sprite->setPosition(position);
+            mSprite->setPosition(position);
         }
 
         void CircleIconButton::draw(sf::RenderWindow &window)
         {
             CircleButton::draw(window);
-            window.draw(*sprite);
+            window.draw(*mSprite);
             // window.draw(*mVerticalRectangleShape);
             // window.draw(*mHorizontalRectangleShape);
         }

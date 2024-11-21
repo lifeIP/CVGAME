@@ -20,21 +20,28 @@ namespace blocks
             EmptyBlock(const sf::Vector2f &position, const sf::Vector2f &size);
             virtual ~EmptyBlock();
 
-
-
             virtual int events(const sf::Window &relativeTo, const sf::Event &event);
             virtual void move(const sf::Vector2f &steps);
             virtual void draw(sf::RenderWindow& window);
 
+            virtual void setPosition(const sf::Vector2f &position);
+            virtual sf::Vector2f getPosition() const;
+
+            virtual void setSize(const sf::Vector2f &size);
+            virtual sf::Vector2f getSize() const;
+
+            virtual void setHeaderSize(const float &headerSize);
+            virtual float getHeaderSize() const;
+
         private: 
             bool isSelected;
-            float mHeaderSize;
             sf::Vector2i *oldPos;
             components::buttons::CircleIconButton *mIconButton;
             components::buttons::RectButton *mExitButton;
         protected:
             sf::RectangleShape *mHeader;
             sf::RectangleShape *mBody;
+            float mHeaderSize;
         };
     }
 }

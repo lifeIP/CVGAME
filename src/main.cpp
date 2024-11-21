@@ -2,7 +2,15 @@
 
 #include "components/buttons/rect/RectButton.hpp"
 #include "components/buttons/circle/CircleIconButton/CircleIconButton.hpp"
+#include "components/visual/ShowCVImage/ShowCVImage.hpp"
 #include "blocks/empty/EmptyBlock.hpp"
+
+
+
+#include <opencv2/core.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 
 #include <memory>
 #include <vector>
@@ -13,11 +21,11 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "CVGAME");
     
-
+    // components::visual::ShowCVImage * cvImg = new components::visual::ShowCVImage(sf::Vector2f(150.f, 150.f), sf::Vector2f(400.f, 300.f));
     // sf::RectangleShape rect(sf::Vector2f(50.f, 50.f));
     // rect.setFillColor(sf::Color::Green);
     
-    std::unique_ptr<blocks::empty::EmptyBlock> eb(new blocks::empty::EmptyBlock(sf::Vector2f(150.f, 150.f), sf::Vector2f(400.f, 300.f)));
+    std::unique_ptr<components::visual::ShowCVImage> eb(new components::visual::ShowCVImage(sf::Vector2f(150.f, 150.f), sf::Vector2f(400.f, 300.f)));
     // components::buttons::CircleIconButton *button = new components::buttons::CircleIconButton(sf::Vector2f(50, 50), std::string("./src/textures/free-icon-settings.png"), 150., 150);
     
 
@@ -50,9 +58,9 @@ int main()
         window.clear(sf::Color(0, 0, 0));
 
         if(bool(eb)){
-            std::cout << "eb" << std::endl;
+            // std::cout << "eb" << std::endl;
             eb.get()->draw(window);
-            std::cout << "eb2" << std::endl;
+            // std::cout << "eb2" << std::endl;
         }
         // button->draw(window);
         window.display();

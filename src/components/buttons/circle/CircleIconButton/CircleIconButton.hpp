@@ -17,9 +17,9 @@ namespace components
         {
 
         private:
-            sf::Sprite *sprite;
-            sf::Texture *texture;
-            sf::Image *image;
+            sf::Sprite *mSprite;
+            sf::Texture *mTexture;
+            sf::Image *mImage;
         public:
             CircleIconButton(const sf::Vector2f &position, const std::string &imagePath, const float size, const std::size_t &pointCount);
             ~CircleIconButton();
