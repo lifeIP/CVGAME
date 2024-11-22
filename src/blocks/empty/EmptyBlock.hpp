@@ -10,6 +10,14 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics.hpp"
 
+
+struct Priority
+{
+    long blockId = 0;
+    unsigned priority = 0;
+};
+
+
 namespace blocks
 {
     namespace empty
@@ -34,11 +42,19 @@ namespace blocks
             virtual float getHeaderSize() const;
 
             void setEnableSettings(bool enableSettings);
+        
+            static void addPriority(long blockId);
+            static long getPriority(long blockId);
+        
+        public:
+            const long mBlockId;
         private: 
             bool isSelected;
             sf::Vector2i *oldPos;
             components::buttons::CircleIconButton *mIconButton;
             components::buttons::RectButton *mExitButton;
+            static inline std::vector<Priority> priority;
+            static inline long veryHighPriorityId;
         protected:
             sf::RectangleShape *mHeader;
             sf::RectangleShape *mBody;
