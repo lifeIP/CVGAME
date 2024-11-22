@@ -23,6 +23,7 @@ namespace components
             blocks::empty::EmptyBlock::move(steps);
             mSprite->move(steps);
         }
+
         int ShowCVImage::events(const sf::Window &relativeTo, const sf::Event &event){
             return blocks::empty::EmptyBlock::events(relativeTo, event);
         }
@@ -66,7 +67,6 @@ namespace components
             cv::Mat mFrameRGB, mFrameRGBA;
             
             mFrameRGB = cv::imread("./src/textures/No_Image_Available.jpg");
-            std::cout << mFrameRGB.size() << std::endl;
 
             if (!mFrameRGB.empty())
             {
@@ -81,6 +81,7 @@ namespace components
 
         ShowCVImage::~ShowCVImage()
         {
+            std::cout << "~ShowCVImage" << std::endl;
             delete mSprite;
             delete mImage;
             delete mTexture;

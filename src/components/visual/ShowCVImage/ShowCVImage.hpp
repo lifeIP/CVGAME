@@ -26,7 +26,7 @@ namespace components
             sf::Texture *mTexture;
         public:
             ShowCVImage(const sf::Vector2f &position, const sf::Vector2f &size);
-            ~ShowCVImage();
+            virtual ~ShowCVImage();
 
             void setMat(const cv::Mat &mat);
 

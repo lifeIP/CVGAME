@@ -31,7 +31,7 @@ namespace blocks
 
         EmptyBlock::EmptyBlock(const sf::Vector2f &position, const sf::Vector2f &size) 
         {
-
+            withSettings = true;
             oldPos = new sf::Vector2i(0, 0);
 
             mHeaderSize = 48.f;
@@ -122,9 +122,10 @@ namespace blocks
                     move(sf::Vector2f(- diff.x, - diff.y));
                 }
             }
-            mIconButton->events(relativeTo, event);
-            mIconButton->handler();
-
+            if (withSettings){
+                mIconButton->events(relativeTo, event);
+                mIconButton->handler();
+            }
             mExitButton->events(relativeTo, event);
             
             if (mExitButton->handler() == 2 || mExitButton->handler() == 3)
@@ -138,7 +139,8 @@ namespace blocks
             mHeader->setPosition(sf::Vector2f(position.x, position.y));
             mBody->setPosition(sf::Vector2f(position.x, position.y + mHeaderSize));
             mExitButton->setPosition(sf::Vector2f(position.x + mBody->getSize().x - 44, position.y + mHeaderSize - 43));
-            mIconButton->setPosition(sf::Vector2f(position.x + 5, position.y + mHeaderSize - 43));
+            
+            if (withSettings) mIconButton->setPosition(sf::Vector2f(position.x + 5, position.y + mHeaderSize - 43));
         }
 
         sf::Vector2f EmptyBlock::getPosition() const{
@@ -160,6 +162,10 @@ namespace blocks
         
         float EmptyBlock::getHeaderSize() const{
             return mHeaderSize;
+        }
+
+        void EmptyBlock::setEnableSettings(bool enableSettings){
+            withSettings = enableSettings;
         }
     }
 }

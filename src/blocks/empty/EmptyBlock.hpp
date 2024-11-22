@@ -33,6 +33,7 @@ namespace blocks
             virtual void setHeaderSize(const float &headerSize);
             virtual float getHeaderSize() const;
 
+            void setEnableSettings(bool enableSettings);
         private: 
             bool isSelected;
             sf::Vector2i *oldPos;
@@ -42,6 +43,7 @@ namespace blocks
             sf::RectangleShape *mHeader;
             sf::RectangleShape *mBody;
             float mHeaderSize;
+            bool withSettings;
         };
     }
 }
