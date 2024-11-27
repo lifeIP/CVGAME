@@ -24,8 +24,8 @@ namespace components
             mSprite->move(steps);
         }
 
-        int ShowCVImage::events(const sf::Window &relativeTo, const sf::Event &event){
-            return blocks::empty::EmptyBlock::events(relativeTo, event);
+        bool ShowCVImage::moveEvent(const sf::Window &relativeTo, const sf::Event &event){
+            return blocks::empty::EmptyBlock::moveEvent(relativeTo, event);
         }
 
         void ShowCVImage::draw(sf::RenderWindow &window)

@@ -10,14 +10,6 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics.hpp"
 
-
-struct Priority
-{
-    long blockId = 0;
-    unsigned priority = 0;
-};
-
-
 namespace blocks
 {
     namespace empty
@@ -28,7 +20,7 @@ namespace blocks
             EmptyBlock(const sf::Vector2f &position, const sf::Vector2f &size);
             virtual ~EmptyBlock();
 
-            virtual int events(const sf::Window &relativeTo, const sf::Event &event);
+
             virtual void move(const sf::Vector2f &steps);
             virtual void draw(sf::RenderWindow& window);
 
@@ -48,6 +40,14 @@ namespace blocks
 
             void moveAble(bool moveable);
         
+            
+
+            virtual bool moveEvent(const sf::Window &relativeTo, const sf::Event &event);
+            virtual bool closeEvent(const sf::Window &relativeTo, const sf::Event &event);
+            virtual bool rightAddButtonEvent(const sf::Window &relativeTo, const sf::Event &event);
+            virtual bool bottomAddButtonEvent(const sf::Window &relativeTo, const sf::Event &event);
+            virtual bool settingsButtonEvent(const sf::Window &relativeTo, const sf::Event &event);
+
         public:
             const long mBlockId;
         private: 
@@ -59,8 +59,6 @@ namespace blocks
             components::buttons::CircleIconButton *mIconButtonDown;
 
             components::buttons::RectButton *mExitButton;
-            static inline std::vector<Priority> priority;
-            static inline long veryHighPriorityId;
             bool moveable;
         protected:
             sf::RectangleShape *mHeader;

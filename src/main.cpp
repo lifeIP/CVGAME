@@ -25,22 +25,13 @@ int main()
     std::vector<blocks::empty::EmptyBlock*> eb;
     eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(10.f, 10.f), sf::Vector2f(400.f, 300.f)));
     eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(460.f, 10.f), sf::Vector2f(400.f, 300.f)));
-    eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(910.f, 10.f), sf::Vector2f(400.f, 300.f)));
+    eb.push_back(new blocks::empty::EmptyBlock(sf::Vector2f(910.f, 10.f), sf::Vector2f(400.f, 300.f)));
 
-    eb.at(0)->setEnableSettings(false);
+    // eb.at(0)->setEnableSettings(false);
 
 
     while (window.isOpen())
     {
-
-
-        unsigned render_queue[eb.size()]={};
-        for(int i = 0; i < eb.size(); i++) render_queue[i] = i;
-
-        std::sort(render_queue, render_queue + eb.size(), [&](int a, int b){
-            return eb.at(a)->getPriority(eb.at(a)->mBlockId) < eb.at(b)->getPriority(eb.at(b)->mBlockId);
-        });
-
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -59,28 +50,17 @@ int main()
 
             for (int i = 0; i < eb.size(); i++)
             {
-                int eb_events = eb.at(render_queue[i])->events(window, event);
-                if (eb_events == 2){
-                    break;
-                }
-                else if (eb_events == -1)
-                {
-                    eb.at(render_queue[i])->~EmptyBlock();
-                    eb.erase(eb.begin() + render_queue[i]);
+                bool eb_events = eb.at(i)->moveEvent(window, event);
+                bool eb_events_1 = eb.at(i)->closeEvent(window, event);
+                bool eb_events_2 = eb.at(i)->rightAddButtonEvent(window, event);
+                bool eb_events_3 = eb.at(i)->bottomAddButtonEvent(window, event);
+                bool eb_events_4 = eb.at(i)->settingsButtonEvent(window, event);
 
-                    render_queue[eb.size()]={};
-                    for(int i = 0; i < eb.size(); i++) render_queue[i] = i;
-
-                    std::sort(render_queue, render_queue + eb.size(), [&](int a, int b){
-                        // std::cout << eb.at(a)->mBlockId << " " << eb.at(b)->mBlockId << std::endl;
-                        return eb.at(a)->getPriority(eb.at(a)->mBlockId) > eb.at(b)->getPriority(eb.at(b)->mBlockId);
-                    });
-                    break;
+                if(eb_events_1){
+                    eb.at(i)->~EmptyBlock();
+                    eb.erase(eb.begin() + i);
                 }
-
-                else if (eb_events == 1){
-                    std::cout << render_queue[i] << " menu" << std::endl;
-                }
+                
             }
         }
 
@@ -88,7 +68,7 @@ int main()
 
         for (int i = 0; i < eb.size(); i++)
         {
-            eb.at(render_queue[i])->draw(window);
+            eb.at(i)->draw(window);
         }
         window.display();
     }

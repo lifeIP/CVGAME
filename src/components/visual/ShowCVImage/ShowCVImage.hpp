@@ -31,7 +31,7 @@ namespace components
             void setMat(const cv::Mat &mat);
 
             virtual void move(const sf::Vector2f &steps);
-            virtual int events(const sf::Window &relativeTo, const sf::Event &event);
+            virtual bool moveEvent(const sf::Window &relativeTo, const sf::Event &event);
             virtual void draw(sf::RenderWindow& window);
         };
     }
