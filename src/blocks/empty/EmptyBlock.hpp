@@ -45,16 +45,23 @@ namespace blocks
         
             static void addPriority(long blockId);
             static long getPriority(long blockId);
+
+            void moveAble(bool moveable);
         
         public:
             const long mBlockId;
         private: 
             bool isSelected;
             sf::Vector2i *oldPos;
+            
             components::buttons::CircleIconButton *mIconButton;
+            components::buttons::CircleIconButton *mIconButtonRight;
+            components::buttons::CircleIconButton *mIconButtonDown;
+
             components::buttons::RectButton *mExitButton;
             static inline std::vector<Priority> priority;
             static inline long veryHighPriorityId;
+            bool moveable;
         protected:
             sf::RectangleShape *mHeader;
             sf::RectangleShape *mBody;

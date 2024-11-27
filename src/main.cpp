@@ -4,6 +4,7 @@
 #include "components/buttons/circle/CircleIconButton/CircleIconButton.hpp"
 #include "components/visual/ShowCVImage/ShowCVImage.hpp"
 #include "blocks/empty/EmptyBlock.hpp"
+#include "manager/BloksManager.hpp"
 
 #include <opencv2/core.hpp>
 #include <opencv2/videoio.hpp>
@@ -19,11 +20,14 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "CVGAME");
 
-    std::vector<blocks::empty::EmptyBlock*> eb;
-    eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(150.f, 150.f), sf::Vector2f(400.f, 300.f)));
-    eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(550.f, 150.f), sf::Vector2f(400.f, 300.f)));
-    eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(950.f, 150.f), sf::Vector2f(400.f, 300.f)));
+    manager::BloksManager mgr;
 
+    std::vector<blocks::empty::EmptyBlock*> eb;
+    eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(10.f, 10.f), sf::Vector2f(400.f, 300.f)));
+    eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(460.f, 10.f), sf::Vector2f(400.f, 300.f)));
+    eb.push_back(new components::visual::ShowCVImage(sf::Vector2f(910.f, 10.f), sf::Vector2f(400.f, 300.f)));
+
+    eb.at(0)->setEnableSettings(false);
 
 
     while (window.isOpen())
@@ -74,10 +78,9 @@ int main()
                     break;
                 }
 
-                // else if (eb_events == 1){
-                //     std::cout << render_queue[i] << " menu" << std::endl;
-                // }
-                // std::cout << eb.size() << std::endl;
+                else if (eb_events == 1){
+                    std::cout << render_queue[i] << " menu" << std::endl;
+                }
             }
         }
 

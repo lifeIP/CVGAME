@@ -26,14 +26,21 @@ namespace blocks
         {
             window.draw(*mHeader);
             window.draw(*mBody);
-            mIconButton->draw(window);
+
+            if (withSettings)
+            {
+                mIconButton->draw(window);
+            }
+            mIconButtonRight->draw(window);
+            mIconButtonDown->draw(window);
             mExitButton->draw(window);
         }
 
         void EmptyBlock::addPriority(long mBlockId)
         {
             for (int i = 0; i < priority.size(); i++)
-                if (priority.at(i).blockId == mBlockId){
+                if (priority.at(i).blockId == mBlockId)
+                {
                     priority.at(i).priority = std::time(nullptr);
                     break;
                 }
@@ -47,9 +54,16 @@ namespace blocks
             return 0;
         }
 
+        void EmptyBlock::moveAble(bool moveable)
+        {
+            moveable = moveable;
+        }
+
         EmptyBlock::EmptyBlock(const sf::Vector2f &position, const sf::Vector2f &size) : mBlockId(
                                                                                              std::chrono::system_clock::now().time_since_epoch().count())
         {
+            moveable = false;
+
             std::time_t result = std::time(nullptr);
             Priority prior;
             prior.blockId = mBlockId;
@@ -81,6 +95,10 @@ namespace blocks
             mExitButton->setTextColor(sf::Color(255, 255, 255));
             mExitButton->setString(sf::String("X"));
 
+
+
+
+
             mIconButton = new components::buttons::CircleIconButton(
                 sf::Vector2f(position.x + 5, position.y + mHeaderSize - 43),
                 std::string("./src/textures/free-icon-settings.png"),
@@ -90,13 +108,39 @@ namespace blocks
             mIconButton->setColorPushed(sf::Color(215, 215, 215));
             mIconButton->setColorFocused(sf::Color(255, 0, 0));
             mIconButton->setColorDefault(sf::Color(0, 255, 0));
+
+
+
+            mIconButtonRight = new components::buttons::CircleIconButton(
+                sf::Vector2f(position.x + size.x + 5, position.y + size.y / 2),
+                std::string("./src/textures/free-icon-expand-6020534.png"),
+                35.f,
+                150);
+
+            mIconButtonRight->setColorPushed(sf::Color(215, 215, 215));
+            mIconButtonRight->setColorFocused(sf::Color(255, 0, 0));
+            mIconButtonRight->setColorDefault(sf::Color(0, 255, 0));
+
+
+
+            mIconButtonDown = new components::buttons::CircleIconButton(
+                sf::Vector2f(position.x + size.x / 2, position.y + size.y + 5),
+                std::string("./src/textures/free-icon-turn-around-6020549.png"),
+                35.f,
+                150);
+
+            mIconButtonDown->setColorPushed(sf::Color(215, 215, 215));
+            mIconButtonDown->setColorFocused(sf::Color(255, 0, 0));
+            mIconButtonDown->setColorDefault(sf::Color(0, 255, 0));
+
         }
 
         EmptyBlock::~EmptyBlock()
         {
             for (int i = 0; i < priority.size(); i++)
             {
-                if (priority.at(i).blockId == mBlockId){
+                if (priority.at(i).blockId == mBlockId)
+                {
                     priority.erase(priority.begin() + i);
                     break;
                 }
@@ -118,62 +162,71 @@ namespace blocks
             mHeader->move(steps);
             mBody->move(steps);
             mIconButton->move(steps);
+            mIconButtonRight->move(steps);
+            mIconButtonDown->move(steps);
             mExitButton->move(steps);
         }
 
         int EmptyBlock::events(const sf::Window &relativeTo, const sf::Event &event)
         {
-            
+
             if (event.type == sf::Event::EventType::MouseButtonPressed)
             {
+
                 if (event.mouseButton.button == sf::Mouse::Left && !isSelected)
                 {
                     if (mHeader->getGlobalBounds().contains(sf::Mouse::getPosition(relativeTo).x, sf::Mouse::getPosition(relativeTo).y))
                     {
-                        *oldPos = sf::Vector2i(sf::Mouse::getPosition(relativeTo).x, sf::Mouse::getPosition(relativeTo).y);
-
-                        for (int i = 0; i < priority.size(); i++)
+                        if (moveable)
                         {
-                            // std::cout << priority.at(i).blockId << " " << mBlockId << std::endl;
-                            if (priority.at(i).blockId == mBlockId)
-                            {
-                                priority.at(i).priority = std::time(nullptr);
-                                break;
-                            }
-                        }
-                        veryHighPriorityId = mBlockId;
-                        isSelected = true;
-                        mExitButton->events(relativeTo, event);
+                            *oldPos = sf::Vector2i(sf::Mouse::getPosition(relativeTo).x, sf::Mouse::getPosition(relativeTo).y);
 
+                            for (int i = 0; i < priority.size(); i++)
+                            {
+                                // std::cout << priority.at(i).blockId << " " << mBlockId << std::endl;
+                                if (priority.at(i).blockId == mBlockId)
+                                {
+                                    priority.at(i).priority = std::time(nullptr);
+                                    break;
+                                }
+                            }
+                            isSelected = true;
+                        }
+
+                        veryHighPriorityId = mBlockId;
+                        mExitButton->events(relativeTo, event);
                         return 2;
                     }
                 }
             }
             else if (event.type == sf::Event::EventType::MouseButtonReleased)
             {
-                if (event.mouseButton.button == sf::Mouse::Left && isSelected)
+                if (moveable)
                 {
-                    isSelected = false;
-                    return 2;
+                    if (event.mouseButton.button == sf::Mouse::Left && isSelected)
+                    {
+                        isSelected = false;
+                        return 2;
+                    }
                 }
             }
 
-            if (veryHighPriorityId != mBlockId)
-                return 0;
-
-            if (
+            if (veryHighPriorityId == mBlockId &&
                 (mHeader->getGlobalBounds().contains(sf::Mouse::getPosition(relativeTo).x, sf::Mouse::getPosition(relativeTo).y)))
             {
                 if (event.type == sf::Event::EventType::MouseMoved)
                 {
-                    if (isSelected)
+                    if (moveable)
                     {
-                        sf::Vector2f diff = sf::Vector2f(
-                            oldPos->x - sf::Mouse::getPosition(relativeTo).x,
-                            oldPos->y - sf::Mouse::getPosition(relativeTo).y);
-                        *oldPos = sf::Vector2i(sf::Mouse::getPosition(relativeTo).x, sf::Mouse::getPosition(relativeTo).y);
+                        if (isSelected)
+                        {
+                            sf::Vector2f diff = sf::Vector2f(
+                                oldPos->x - sf::Mouse::getPosition(relativeTo).x,
+                                oldPos->y - sf::Mouse::getPosition(relativeTo).y);
+                            *oldPos = sf::Vector2i(sf::Mouse::getPosition(relativeTo).x, sf::Mouse::getPosition(relativeTo).y);
 
-                        move(sf::Vector2f(-diff.x, -diff.y));
+                            move(sf::Vector2f(-diff.x, -diff.y));
+                        }
                     }
                 }
 
@@ -185,10 +238,21 @@ namespace blocks
                         return 1;
                     }
                 }
+                
                 if (mExitButton->handler() != 0)
                 {
                     return -1;
                 }
+            }
+            mIconButtonRight->events(relativeTo, event);
+            if (mIconButtonRight->handler() == 1 || mIconButtonRight->handler() == 3)
+            {
+                return 6;
+            }
+            mIconButtonDown->events(relativeTo, event);
+            if (mIconButtonDown->handler() == 1 || mIconButtonDown->handler() == 3)
+            {
+                return 7;
             }
             return 0;
         }
