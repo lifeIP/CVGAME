@@ -35,13 +35,8 @@ namespace blocks
 
             void setEnableSettings(bool enableSettings);
         
-            static void addPriority(long blockId);
-            static long getPriority(long blockId);
-
             void moveAble(bool moveable);
-        
             
-
             virtual bool moveEvent(const sf::Window &relativeTo, const sf::Event &event);
             virtual bool closeEvent(const sf::Window &relativeTo, const sf::Event &event);
             virtual bool rightAddButtonEvent(const sf::Window &relativeTo, const sf::Event &event);

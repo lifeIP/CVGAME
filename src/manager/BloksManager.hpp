@@ -14,31 +14,51 @@
 #include <iostream>
 #include "../libs/json-develop/single_include/nlohmann/json.hpp"
 #include "../blocks/empty/EmptyBlock.hpp"
+#include "../components/visual/ShowCVImage/ShowCVImage.hpp"
+
 
 namespace manager
 {   
     class BloksManager
     {
     private:
-        sf::Vector2f mPosition;
-        sf::Vector2f mSize;
+        
         std::vector<blocks::empty::EmptyBlock*> mBlocks;
+        sf::Vector2f mBlockSize;
+
+        sf::Vector2f mBlockPosition;
+        sf::Vector2f mMargins;
+
     public:
         BloksManager(/* args */);
-        ~BloksManager();
+        virtual ~BloksManager();
+
+        void addBlock(unsigned int column, unsigned int row);
+
+        virtual void draw(sf::RenderWindow& window);
     };
     
-    BloksManager::BloksManager(/* args */)
+
+    void BloksManager::addBlock(unsigned int column, unsigned int row){
+        mBlockPosition = sf::Vector2f(mBlockSize.x * column + mMargins.x * column, mBlockSize.y * row + mMargins.y * row);
+        mBlocks.push_back(new components::visual::ShowCVImage(mBlockPosition, mBlockSize));
+    }
+
+    BloksManager::BloksManager()
     {
-        nlohmann::json j = {
-            {"pi", 3.141},
-            {"all", "no"}
-        };
-        std::cout << j << std::endl;
+        mBlockSize = sf::Vector2f(400, 300);
+        mMargins = sf::Vector2f(45, 45);
+        mBlockPosition = sf::Vector2f(0, 0);
     }
     
     BloksManager::~BloksManager()
     {
     }
     
+    void BloksManager::draw(sf::RenderWindow& window){
+        for (int i = 0; i < mBlocks.size(); i++)
+        {
+            mBlocks.at(i)->draw(window);
+        }
+    }
 }

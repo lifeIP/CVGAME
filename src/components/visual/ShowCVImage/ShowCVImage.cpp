@@ -24,9 +24,11 @@ namespace components
             mSprite->move(steps);
         }
 
+
         bool ShowCVImage::moveEvent(const sf::Window &relativeTo, const sf::Event &event){
             return blocks::empty::EmptyBlock::moveEvent(relativeTo, event);
         }
+
 
         void ShowCVImage::draw(sf::RenderWindow &window)
         {
@@ -37,6 +39,7 @@ namespace components
             blocks::empty::EmptyBlock::draw(window);
             window.draw(*mSprite);
         }
+
 
         void ShowCVImage::setMat(const cv::Mat &mFrameRGB)
         {
@@ -53,6 +56,7 @@ namespace components
             }
         }
 
+
         ShowCVImage::ShowCVImage(const sf::Vector2f &position, const sf::Vector2f &size) : blocks::empty::EmptyBlock(position, size)
         {
             mSprite = new sf::Sprite();
@@ -60,8 +64,6 @@ namespace components
             mTexture = new sf::Texture();
 
             mSprite->setPosition(sf::Vector2f(position.x + 10, position.y + mHeaderSize + 10));
-
-
             
 
             cv::Mat mFrameRGB, mFrameRGBA;
@@ -78,6 +80,7 @@ namespace components
                 }
             }
         }
+
 
         ShowCVImage::~ShowCVImage()
         {

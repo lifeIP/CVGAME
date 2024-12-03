@@ -44,7 +44,7 @@ namespace blocks
         EmptyBlock::EmptyBlock(const sf::Vector2f &position, const sf::Vector2f &size) : mBlockId(
                                                                                              std::chrono::system_clock::now().time_since_epoch().count())
         {
-            moveable = true;
+            moveable = false;
             isSelected = false;
 
             withSettings = true;
